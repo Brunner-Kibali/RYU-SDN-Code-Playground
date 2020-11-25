@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Final_Year_Project/Ryu-SDN-Load-Balancer" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Final_Year_Project/SDN-Load-Balancer" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Final_Year_Project/TCP-based-Round-Robin-Load-Balancer" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Final_Year_Project/ryu" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Ryu-Dynamic_Routing" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Ryu-SDN-Load-Balancer" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/flowmanager" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/mininet" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/multipath" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ryu" vcs="Git" />
+  </component>
+</project>

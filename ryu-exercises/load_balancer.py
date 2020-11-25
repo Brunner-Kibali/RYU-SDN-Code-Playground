@@ -1,6 +1,6 @@
-#http://docs.openvswitch.org/en/latest/faq/openflow/
-#https://mail.openvswitch.org/pipermail/ovs-discuss/2016-August/042394.html
-#https://stackoverflow.com/questions/36949861/group-table-issue-openflow-mininet
+# http://docs.openvswitch.org/en/latest/faq/openflow/
+# https://mail.openvswitch.org/pipermail/ovs-discuss/2016-August/042394.html
+# https://stackoverflow.com/questions/36949861/group-table-issue-openflow-mininet
 
 from ryu.base import app_manager
 from ryu.controller import ofp_event
@@ -40,7 +40,7 @@ class SimpleSwitch13(app_manager.RyuApp):
             match = parser.OFPMatch(in_port=3)
             self.add_flow(datapath, 10, match, actions)
 
-            #add the return flow for h1 in s1.  
+            # add the return flow for h1 in s1.
             # h1 is connected to port 3.
             actions = [parser.OFPActionOutput(3)]
             match = parser.OFPMatch(in_port=1)
@@ -50,17 +50,15 @@ class SimpleSwitch13(app_manager.RyuApp):
             match = parser.OFPMatch(in_port=2)
             self.add_flow(datapath, 10, match, actions)
 
-
         # switch s4
         if datapath.id == 4:
-	    # add group tables
+            # add group tables
             self.send_group_mod(datapath)
             actions = [parser.OFPActionGroup(group_id=50)]
             match = parser.OFPMatch(in_port=3)
             self.add_flow(datapath, 10, match, actions)
 
-
-            #add the return flow for h2 in s4.  
+            # add the return flow for h2 in s4.
             # h2 is connected to port 3.
             actions = [parser.OFPActionOutput(3)]
             match = parser.OFPMatch(in_port=1)
@@ -69,7 +67,6 @@ class SimpleSwitch13(app_manager.RyuApp):
             actions = [parser.OFPActionOutput(3)]
             match = parser.OFPMatch(in_port=2)
             self.add_flow(datapath, 10, match, actions)
-
 
         # switch s2
         if datapath.id == 2:
@@ -81,7 +78,6 @@ class SimpleSwitch13(app_manager.RyuApp):
             actions = [parser.OFPActionOutput(1)]
             match = parser.OFPMatch(in_port=2)
             self.add_flow(datapath, 10, match, actions)
-
 
         # switch s3
         if datapath.id == 3:
@@ -168,8 +164,6 @@ class SimpleSwitch13(app_manager.RyuApp):
                                   in_port=in_port, actions=actions, data=data)
         datapath.send_msg(out)
 
-
-
     def send_group_mod(self, datapath):
         ofproto = datapath.ofproto
         parser = datapath.ofproto_parser
@@ -177,8 +171,8 @@ class SimpleSwitch13(app_manager.RyuApp):
         # Hardcoding the stuff, as we already know the topology diagram.
         # Group table1
         # Receiver port3 (host connected), forward it to port1(switch) and Port2(switch)
-        LB_WEIGHT1 = 30 #percentage
-        LB_WEIGHT2 = 70 #percentage
+        LB_WEIGHT1 = 30  # percentage
+        LB_WEIGHT2 = 70  # percentage
 
         watch_port = ofproto_v1_3.OFPP_ANY
         watch_group = ofproto_v1_3.OFPQ_ALL
@@ -187,9 +181,7 @@ class SimpleSwitch13(app_manager.RyuApp):
         actions2 = [parser.OFPActionOutput(2)]
         buckets = [parser.OFPBucket(LB_WEIGHT1, watch_port, watch_group, actions=actions1),
                    parser.OFPBucket(LB_WEIGHT2, watch_port, watch_group, actions=actions2)]
-        
+
         req = parser.OFPGroupMod(datapath, ofproto.OFPGC_ADD,
                                  ofproto.OFPGT_SELECT, 50, buckets)
         datapath.send_msg(req)
-
-

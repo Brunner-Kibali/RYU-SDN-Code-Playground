@@ -1,0 +1,267 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>1_SDN_theory</title><link href='https://fonts.loli.net/css?family=Merriweather:900,900italic,300,300italic&subset=latin-ext' rel='stylesheet' type='text/css' />
+<link href='https://fonts.loli.net/css?family=Lato:900,300&subset=latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 40px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:first-child { margin-top: -20px; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; }
+button, input, select, textarea { color: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 2; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px !important; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 32px; padding-right: 32px; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0px; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="mermaid"] svg, [lang="flow"] svg { max-width: 100%; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+
+
+:root { --control-text-color: #777; }
+h1, .h1, .f1 { font-size: 2rem; line-height: 2.5rem; }
+h2, .h2, .f2 { font-size: 1.5rem; line-height: 2rem; }
+h3, .h3, .f3 { font-size: 1.25rem; line-height: 1.5rem; }
+p, .p, .f4, h4, h5, h6, dl, ol, ul, pre[cid], div[cid], #typora-source { font-size: 1.125rem; line-height: 1.5rem; }
+h4 { font-size: 1.13rem; }
+body { font-family: Merriweather, "PT Serif", Georgia, "Times New Roman", STSong, serif; line-height: 1.5rem; font-weight: 400; }
+#write { max-width: 914px; color: rgb(51, 51, 51); }
+img { width: auto; max-width: 100%; }
+body { font-size: 1.5rem; box-sizing: border-box; }
+.ty-table-edit { background: rgb(237, 237, 237); }
+table { width: 100%; font-size: 1.125rem; }
+table > thead > tr > th, table > thead > tr > td, table > tbody > tr > th, table > tbody > tr > td, table > tfoot > tr > th, table > tfoot > tr > td { padding: 12px; line-height: 1.2; vertical-align: top; border-top: 1px solid rgb(51, 51, 51); }
+table > thead > tr > th { vertical-align: bottom; border-bottom: 2px solid rgb(51, 51, 51); }
+table > caption + thead > tr:first-child > th, table > caption + thead > tr:first-child > td, table > colgroup + thead > tr:first-child > th, table > colgroup + thead > tr:first-child > td, table > thead:first-child > tr:first-child > th, table > thead:first-child > tr:first-child > td { border-top: 0px; }
+table > tbody + tbody { border-top: 2px solid rgb(51, 51, 51); }
+p { font-weight: 300; line-height: 1.5; }
+abbr { border-bottom: 1px dotted black; cursor: help; }
+pre, code { font-family: Menlo, Monaco, "Courier New", monospace; }
+code, .md-fences { color: rgb(122, 122, 122); }
+.md-fences { padding: 0.5rem 1.125em; margin-bottom: 0.88em; font-size: 1rem; border: 1px solid rgb(122, 122, 122); }
+blockquote { padding: 1.33em; font-style: italic; border-left: 5px solid rgb(122, 122, 122); color: rgb(85, 85, 85); }
+blockquote em { color: rgb(0, 0, 0); }
+blockquote footer { font-size: 0.85rem; font-style: normal; background-color: rgb(255, 255, 255); color: rgb(122, 122, 122); border-color: transparent; }
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 { font-family: Lato, "Helvetica Neue", Helvetica, sans-serif; font-weight: bold; line-height: 1.2; margin: 1em 0px 0.5em; }
+@media screen and (min-width: 48em) {
+  .h1, h1 { font-size: 3.25rem; }
+  .h2, h2 { font-size: 2.298rem; }
+  .h3, h3 { font-size: 1.625rem; }
+  .h4, h4 { font-size: 1.3rem; }
+  #write > h4.md-focus::before, #write > h5.md-focus::before, #write > h6.md-focus::before { top: 1px; }
+  .p, p, li { font-size: 1.25rem; line-height: 1.8; }
+  table { font-size: 1.25rem; }
+}
+@media (max-width: 48em) {
+  blockquote { margin-left: 1rem; margin-right: 0px; padding: 0.5em; }
+  .h1, h1 { font-size: 2.827rem; }
+  .h2, h2 { font-size: 1.999rem; }
+  .h3, h3 { font-size: 1.413rem; }
+  .h4, h4 { font-size: 1.3rem; }
+}
+@media screen and (min-width: 64em) {
+  .h1, h1 { font-size: 4.498rem; }
+  .h2, h2 { font-size: 2.29rem; }
+  .h3, h3 { font-size: 1.9rem; }
+  .h4, h4 { font-size: 1.591rem; }
+  #write > h4.md-focus::before { top: 4px; }
+}
+a { color: rgb(70, 63, 92); text-decoration: underline; }
+#write { padding-top: 2rem; }
+#write pre.md-meta-block { min-height: 35px; padding: 2000px 1em 10px 0px; white-space: pre; border-width: 0px 30px; border-top-style: initial; border-bottom-style: initial; border-top-color: initial; border-bottom-color: initial; border-image: initial; border-left-style: solid; border-left-color: rgb(248, 248, 248); border-right-style: solid; border-right-color: rgb(248, 248, 248); width: 100vw; max-width: calc(100% + 60px); margin-left: -30px; margin-bottom: 2em; margin-top: -2010px; line-height: 1.5em; color: rgb(122, 122, 122); background-color: rgb(250, 250, 250); font-family: Lato, "Helvetica Neue", Helvetica, sans-serif; font-weight: 300; clear: both; font-size: 1.125rem; }
+.md-image > .md-meta { color: rgb(70, 63, 92); }
+.footnotes { font-size: 1.1rem; }
+.md-tag { font-family: Lato, "Helvetica Neue", Helvetica, sans-serif; }
+.code-tooltip { background: white; }
+.code-tooltip-content { font-size: 1.1rem; }
+.task-list { padding-left: 0px; }
+.md-task-list-item { padding-left: 34px; }
+.md-task-list-item > input { width: 1.25rem; height: 1.25rem; display: block; -webkit-appearance: initial; top: -0.5rem; margin-left: -1.6em; margin-top: calc(1rem - 7px); border: none; }
+.md-task-list-item > input:focus { outline: none; box-shadow: none; }
+.md-task-list-item > input::before { border: 1px solid rgb(85, 85, 85); border-radius: 1.5rem; width: 1.5rem; height: 1.5rem; background: rgb(255, 255, 255); content: " "; transition: background-color 200ms ease-in-out; display: block; }
+.md-task-list-item > input:checked::before, .md-task-list-item > input[checked]::before { background: rgb(51, 51, 51); border-width: 2px; display: inline-block; transition: background-color 200ms ease-in-out; }
+.md-task-list-item > input:checked::after, .md-task-list-item > input[checked]::after { opacity: 1; }
+.md-task-list-item > input::after { transition: opacity 0.05s ease-in-out; transform: rotate(-45deg); position: absolute; top: 0.4375rem; left: 0.28125rem; width: 0.9375rem; height: 0.5rem; border-width: 0px 0px 3px 3px; border-bottom-style: solid; border-left-style: solid; border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); border-image: initial; border-top-style: initial; border-top-color: initial; border-right-style: initial; border-right-color: initial; content: " "; opacity: 0; }
+.md-tag { color: inherit; }
+.md-toc:focus .md-toc-content { margin-top: 19px; }
+#typora-sidebar { font-size: 1rem !important; }
+.html-for-mac #typora-sidebar { background-color: white; }
+.outline-content li, .outline-content ul { font-size: 1rem !important; }
+.outline-title { line-height: inherit; margin-top: 10px; }
+.outline-expander { width: 18px; }
+.outline-expander::before { content: "+"; font-family: inherit; color: rgb(108, 108, 108); font-size: 1.5rem; top: 0.1rem; }
+.outline-expander:hover::before { content: "+"; }
+.outline-item-open > .outline-item > .outline-expander::before { content: "-"; }
+#typora-source { font-family: Courier, monospace; color: rgb(106, 106, 106); }
+.os-windows #typora-source { font-family: inherit; }
+.cm-s-typora-default .cm-header, .cm-s-typora-default .cm-property, .CodeMirror.cm-s-typora-default div.CodeMirror-cursor { color: rgb(66, 139, 202); }
+.cm-s-typora-default .cm-atom, .cm-s-typora-default .cm-number { color: rgb(119, 119, 119); }
+.preference-item-hint { margin-top: 16px; }
+.md-diagram-panel { margin-top: 24px; margin-left: -1.2em; }
+.md-mathjax-midline { background: rgb(250, 250, 250); }
+.enable-diagrams pre.md-fences[lang="sequence"] .code-tooltip, .enable-diagrams pre.md-fences[lang="flow"] .code-tooltip, .enable-diagrams pre.md-fences[lang="mermaid"] .code-tooltip { bottom: -3.4em; }
+.dropdown-menu .divider { border-color: rgb(229, 229, 229); }
+
+
+
+
+
+ .typora-export li, .typora-export p, .typora-export,  .footnote-line {white-space: normal;} 
+</style>
+</head>
+<body class='typora-export' >
+<div  id='write'  class = 'is-node'><h1><a name='header-n0' class='md-header-anchor '></a>SDN Theory</h1><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>Version: 1.0.1</p><p>&nbsp;</p><hr /><blockquote><p>KNET Solutions (Online Training Centre),</p><p><a href='http://knetsolutions.in' target='_blank' class='url'>http://knetsolutions.in</a>                    <span>		</span>   </p><p><a href='mailto:knetsolutions2@gmail.com' target='_blank' class='url'>knetsolutions2@gmail.com</a></p><p>Phone/WhatsApp: +919445042007</p><p>we provide Academic SDN Project assistance/guidance. </p></blockquote><hr /><div class='md-toc' mdtype='toc'><p class="md-toc-content"><span class="md-toc-item md-toc-h1" data-ref="n0"><a class="md-toc-inner" href="#header-n0">SDN Theory</a></span><span class="md-toc-item md-toc-h2" data-ref="n24"><a class="md-toc-inner" href="#header-n24">1. SDN Usecases</a></span><span class="md-toc-item md-toc-h3" data-ref="n25"><a class="md-toc-inner" href="#header-n25">A. Openflow specific usecases</a></span><span class="md-toc-item md-toc-h3" data-ref="n46"><a class="md-toc-inner" href="#header-n46">B. Automated Service Delivery: </a></span><span class="md-toc-item md-toc-h4" data-ref="n49"><a class="md-toc-inner" href="#header-n49">What is dynamic VPN?</a></span><span class="md-toc-item md-toc-h3" data-ref="n66"><a class="md-toc-inner" href="#header-n66">C. Cloud and NFV: </a></span><span class="md-toc-item md-toc-h4" data-ref="n69"><a class="md-toc-inner" href="#header-n69">Tenant or Network wide Policy</a></span><span class="md-toc-item md-toc-h4" data-ref="n84"><a class="md-toc-inner" href="#header-n84">Service Function Chain</a></span><span class="md-toc-item md-toc-h4" data-ref="n87"><a class="md-toc-inner" href="#header-n87">QoS</a></span><span class="md-toc-item md-toc-h4" data-ref="n90"><a class="md-toc-inner" href="#header-n90">Inter Datacenter connection </a></span><span class="md-toc-item md-toc-h3" data-ref="n93"><a class="md-toc-inner" href="#header-n93">D. Network Resources Optimization (NRO): </a></span><span class="md-toc-item md-toc-h4" data-ref="n99"><a class="md-toc-inner" href="#header-n99">Problem statement:</a></span><span class="md-toc-item md-toc-h4" data-ref="n104"><a class="md-toc-inner" href="#header-n104">Solution:  </a></span><span class="md-toc-item md-toc-h3" data-ref="n108"><a class="md-toc-inner" href="#header-n108">E. Visibility and Control: </a></span><span class="md-toc-item md-toc-h2" data-ref="n112"><a class="md-toc-inner" href="#header-n112">2. SDN Introduction</a></span><span class="md-toc-item md-toc-h2" data-ref="n120"><a class="md-toc-inner" href="#header-n120">3. SDN Value proposition</a></span><span class="md-toc-item md-toc-h2" data-ref="n126"><a class="md-toc-inner" href="#header-n126">4. Six Characteristics of SDN</a></span><span class="md-toc-item md-toc-h2" data-ref="n141"><a class="md-toc-inner" href="#header-n141">5. SDN Architecutre</a></span><span class="md-toc-item md-toc-h3" data-ref="n144"><a class="md-toc-inner" href="#header-n144">SDN Networking Devices / Network Infrastructure: </a></span><span class="md-toc-item md-toc-h3" data-ref="n148"><a class="md-toc-inner" href="#header-n148">SDN Controller: </a></span><span class="md-toc-item md-toc-h3" data-ref="n152"><a class="md-toc-inner" href="#header-n152">SDN Applications: </a></span><span class="md-toc-item md-toc-h2" data-ref="n157"><a class="md-toc-inner" href="#header-n157">6. SDN Controllers overview:</a></span><span class="md-toc-item md-toc-h3" data-ref="n159"><a class="md-toc-inner" href="#header-n159">POX </a></span><span class="md-toc-item md-toc-h3" data-ref="n170"><a class="md-toc-inner" href="#header-n170">RYU </a></span><span class="md-toc-item md-toc-h3" data-ref="n181"><a class="md-toc-inner" href="#header-n181">OpenDayLight </a></span><span class="md-toc-item md-toc-h3" data-ref="n194"><a class="md-toc-inner" href="#header-n194">ONOS</a></span><span class="md-toc-item md-toc-h2" data-ref="n205"><a class="md-toc-inner" href="#header-n205">7. Opensource Infrastructure Orchestrator (Testbed)</a></span><span class="md-toc-item md-toc-h3" data-ref="n206"><a class="md-toc-inner" href="#header-n206">Mininet</a></span><span class="md-toc-item md-toc-h3" data-ref="n216"><a class="md-toc-inner" href="#header-n216">Knet</a></span><span class="md-toc-item md-toc-h3" data-ref="n231"><a class="md-toc-inner" href="#header-n231">Openvswitch</a></span><span class="md-toc-item md-toc-h2" data-ref="n235"><a class="md-toc-inner" href="#header-n235">8. References</a></span></p></div><hr /><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h2><a name='header-n24' class='md-header-anchor '></a>1. SDN Usecases</h2><h3><a name='header-n25' class='md-header-anchor '></a>A. Openflow specific usecases</h3><p>Cost effective hardware device, which can be work as a any networking device (L2 to L7) based on the SDN Application activated.</p><p>Traditional Networking appliances:  </p><ul><li>Switching(Fast Path, Loop free)</li><li>Router</li><li>VLAN (Mac based vlan, port based vlan)</li><li>Stateful/Stateless Firewall </li><li>Proxy Apps (ARP, DNS, Web..etc), Redirection</li><li>Load balancer</li><li>Network Monitoring/IPS/IDS</li></ul><p>and much more.</p><p>&nbsp;</p><h3><a name='header-n46' class='md-header-anchor '></a>B. Automated Service Delivery: </h3><p>Providing on-demand services that may be controlled by the end user or the service provider. Examples include bandwidth scheduling (either calendared or on-demand) or dynamic VPN services.</p><p><strong>Todo : Dynamic VPN Image to be placed here</strong></p><h4><a name='header-n49' class='md-header-anchor '></a>What is dynamic VPN?</h4><p>In Recent years, the demand for application specific networks (e.g. video, voice or payment networks) is growing. Therefore operators are looking for a more flexible approach in the form of DynamicVPNs (DVPNs).</p><p>DVPNs are private networks over which end-users can communicate which are deployed
+by their common Service Provider (SP). They differ from normal VPNs in the sense that they can be altered multiple time over their potentially short lifetime. Using DVPNs, SPs can react more rapidly to customer requests to configure, adjust or tear down their VPNs.</p><ul><li>Implementation of VPNs will be automated (no manual config by engineer)</li><li>Management /Orchestration Software will take care of configuring the network with endpoints, paths installation, and verification. </li><li>Also calculation of the optimal paths and setting the correct rate limits.</li><li>Management Software is able to change the configuration of DVPNs when requested.  </li><li>Also, DVPN is no longer in use, it will need to be automatically purged from the network to free up resources for other services. </li><li>Update the VPN service based on Network resources/Characterisitcs</li></ul><p>&nbsp;</p><h3><a name='header-n66' class='md-header-anchor '></a>C. Cloud and NFV: </h3><p>Agile service delivery on cloud infrastructure in either the enterprise or service provider environment. The underlay will frequently be OpenStack, and services may be implemented using Network Functions Virtualization (NFV).</p><p>&nbsp;</p><h4><a name='header-n69' class='md-header-anchor '></a>Tenant or Network wide Policy</h4><p>Apply the network wide /Tenant wide policy such as</p><p>Example: </p><ul><li>Allow subetA can access internet without any bandwidth,time restriction</li><li>Allow hostA can access internet only  8AM to 10AM at 500Kbps bw</li><li>Allow hostB can access ServerA only on WEB PORT.</li><li>Allow ServerA has access to all hosts</li><li>Block ICMP ports are all devices in this denant.</li></ul><h4><a name='header-n84' class='md-header-anchor '></a>Service Function Chain</h4><p>Chain of VNF Functions</p><h4><a name='header-n87' class='md-header-anchor '></a>QoS</h4><p>Application Specific Quality of Service either dynamically. Dynamic bandwidth allocation, rerouting etc. Better Quality of experience.</p><h4><a name='header-n90' class='md-header-anchor '></a>Inter Datacenter connection </h4><p>and much more.</p><p>&nbsp;</p><h3><a name='header-n93' class='md-header-anchor '></a>D. Network Resources Optimization (NRO): </h3><p>Dynamically optimizing the network based on load and state. This is the most common carrier use case as it optimizes the network using the near-real-time state of traffic, topology and equipment. NRO uses a variety of southbound protocols (for example, NETCONF, BGP-LS or OpenFlow) depending on the underlying network. In addition to being used “under the covers” by many telcos and cable operators, this is a top use case for enterprise and financial institutions.</p><p>** Example:**</p><p>Diagram:</p><p><img src='imgs/internet1.jpg' alt='internet1' referrerPolicy='no-referrer' /></p><h4><a name='header-n99' class='md-header-anchor '></a>Problem statement:</h4><p>ISPs have a country wide topology ,connecting the cities with high bandwidth links, and multipath connectivity across the topology.</p><p>Very often some links are Full and some links are Idle. Static/Manaul rerouting is the current existing solution, This affects the customer traffic as well not efficient one.</p><p><img src='imgs/internet2.jpg' alt='Internet2' referrerPolicy='no-referrer' /></p><h4><a name='header-n104' class='md-header-anchor '></a>Solution:  </h4><p>Network automation which monitors the entire topology and decides the traffic rerouting based on the given policy .  SDN helps to achive this in both SDN Topology , as well as hybrid topology (Mixed of SDN and traditional routers)</p><p>&nbsp;</p><h3><a name='header-n108' class='md-header-anchor '></a>E. Visibility and Control: </h3><p>Centralized administration of the network and/or multiple controllers. This is sometimes used by carriers or enterprises as a precursor to NRO.</p><p>&nbsp;</p><p>&nbsp;</p><h2><a name='header-n112' class='md-header-anchor '></a>2. SDN Introduction</h2><p>SDN is meant to address the fact that the static architecture of traditional networks is decentralized and complex while current networks require more flexibility and easy troubleshooting.</p><p>SDN suggests to centralize network intelligence in one network component by disassociating the forwarding process of network packets (data plane) from the routing process (control plane). The control plane consists of one or more controllers which are considered as the brain of SDN network where the whole intelligence is incorporated.</p><p>Control and Data(Forwarding) planes are separated. Moves the Control Plane to the Centralized location, runs on general purpose computer.</p><p>Enabling the network control to become directly programmable and the underlying infrastructure to be abstracted for applications and network services. The OpenFlow protocol is a foundational element for building SDN solutions.</p><p>Software-defined networking (SDN) technology is an approach to cloud computing that facilitates network management and enables programmatically efficient network configuration in order to improve network performance and monitoring.</p><p><img src='imgs/sdn_paradigm.jpg' alt='Alt text' referrerPolicy='no-referrer' /></p><h2><a name='header-n120' class='md-header-anchor '></a>3. SDN Value proposition</h2><p>Agility   -  Speed of Spin up the Network Services</p><p>Reduced Risk -  Policy based networks(per user, per application, per VM)</p><p>Operational Efficiency – separataion of control &amp; data planes</p><p>Reduced Spend – CAPEX / OPEX</p><h2><a name='header-n126' class='md-header-anchor '></a>4. Six Characteristics of SDN</h2><ol start='' ><li>Plane Separation</li><li>Simplified Forwarding Element</li><li>Centralized Control</li><li>Network Automation</li><li>Virtualization</li><li>Openness</li></ol><h2><a name='header-n141' class='md-header-anchor '></a>5. SDN Architecutre</h2><p><img src='imgs/sdn_arch1.jpg' alt='Alt text' referrerPolicy='no-referrer' /></p><p>SDN architectures generally have three components or groups of functionality:</p><h3><a name='header-n144' class='md-header-anchor '></a>SDN Networking Devices / Network Infrastructure: </h3><p>The SDN networking devices control the forwarding and data processing capabilities for the network. This includes forwarding and processing of the data path.
+Example:  Openvswitch (openflow protocol)</p><p><strong>SouthBound Interface:</strong></p><p>Southbound interface is the connection between the controller and the physically networking hardware</p><h3><a name='header-n148' class='md-header-anchor '></a>SDN Controller: </h3><p>The SDN Controller is a logical entity that receives instructions or requirements from the SDN Application layer and relays them to the networking components. 
+The controller also extracts information about the network from the hardware devices and communicates back to the SDN Applications with an abstract view of the network, including statistics and events about what is happening.</p><p>Example:<br/><strong>RYU, OpenDayLight, ONOS, FloodLight etc</strong></p><h3><a name='header-n152' class='md-header-anchor '></a>SDN Applications: </h3><p>SDN Applications are programs that communicate behaviors and needed resources with the SDN Controller via application programming interface (APIs). These applications could include networking management, analytics, or business applications used to run large data centers. This is the place for research, innovations, new ideas etc.</p><p>A Northbound interface is defined as the connection between the controller and applications.</p><p><img src='imgs/sdn_bigger_picture2.jpg' alt='Bigger View' referrerPolicy='no-referrer' /></p><p>&nbsp;</p><h2><a name='header-n157' class='md-header-anchor '></a>6. SDN Controllers overview:</h2><h3><a name='header-n159' class='md-header-anchor '></a>POX </h3><ol start='' ><li>Python</li><li>Early days controller</li><li>Mainly openflow support </li><li>Not much active now.</li></ol><h3><a name='header-n170' class='md-header-anchor '></a>RYU </h3><ol start='' ><li>Python</li><li>Actively developed and supported</li><li>Highly used for research activities</li></ol><p><strong>southbound interfaces</strong>
+openflow, ovsdb, bgp, of-config(?)</p><p><strong>northbound interfaces</strong>
+REST</p><h3><a name='header-n181' class='md-header-anchor '></a>OpenDayLight </h3><ol start='' ><li>Enterprises use cases</li><li>Equipment Manufactures support </li><li>Bulky, Production Ready</li><li>Java</li></ol><p><strong>southbound interfaces:</strong></p><p> a. openflow
+ b. OF-config
+ c. OVSDB
+ d. NETCONF
+ e. LISP
+ f. BGP
+ g. PCEP
+ h. CAPWAP
+ i. LACP...
+    and much more</p><p><strong>northbound interfaces:</strong>
+ a. RESTCONF
+ b. REST
+ c. NETCONF
+ d. AMQP(MessageQ)</p><h3><a name='header-n194' class='md-header-anchor '></a>ONOS</h3><ol start='' ><li>Telecom usecases</li><li>Operators support</li><li>Java</li></ol><p><strong>southbound interfaces:</strong>
+ OpenFlow, Netconf, OVSDB, TL1, CLI</p><p><strong>northbound interfaces:</strong>
+??</p><h2><a name='header-n205' class='md-header-anchor '></a>7. Opensource Infrastructure Orchestrator (Testbed)</h2><h3><a name='header-n206' class='md-header-anchor '></a>Mininet</h3><ol start='' ><li>Simple, Lightweight</li><li>Linux Network Name space techniques for Nodes</li><li>SDN Support, Build in Topology Command</li><li>Stable release</li></ol><h3><a name='header-n216' class='md-header-anchor '></a>Knet</h3><ol start='' ><li>Heavy,  Nodes are Real Linux Systems</li><li>Docker based</li><li>Traditional Networking Topology support (Router, Firewall, IPS/ IDS, etc)</li><li>SDN Support,  Topology needs to be defined in YAML File</li><li>In built UI</li><li>Development release</li></ol><h3><a name='header-n231' class='md-header-anchor '></a>Openvswitch</h3><p>Open vSwitch is a production quality, multilayer virtual switch licensed under the open source Apache 2.0 license.  It is designed to enable massive network automation through programmatic extension, while still supporting standard management interfaces and protocols (e.g. NetFlow, sFlow, IPFIX, RSPAN, CLI, LACP, 802.1ag). </p><p>&nbsp;</p><p>&nbsp;</p><h2><a name='header-n235' class='md-header-anchor '></a>8. References</h2><ol start='' ><li><a href='https://www.opennetworking.org/sdn-definition/' target='_blank' class='url'>https://www.opennetworking.org/sdn-definition/</a></li><li><a href='https://en.wikipedia.org/wiki/Software-defined_networking' target='_blank' class='url'>https://en.wikipedia.org/wiki/Software-defined_networking</a></li><li><a href='https://www.sdxcentral.com/sdn-nfv-use-cases/' target='_blank' class='url'>https://www.sdxcentral.com/sdn-nfv-use-cases/</a></li></ol></div>
+</body>
+</html>

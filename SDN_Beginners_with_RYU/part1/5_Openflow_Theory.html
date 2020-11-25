@@ -1,0 +1,327 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>5_Openflow_Theory</title><link href='https://fonts.loli.net/css?family=Merriweather:900,900italic,300,300italic&subset=latin-ext' rel='stylesheet' type='text/css' />
+<link href='https://fonts.loli.net/css?family=Lato:900,300&subset=latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 40px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:first-child { margin-top: -20px; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; }
+button, input, select, textarea { color: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 2; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px !important; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 32px; padding-right: 32px; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0px; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="mermaid"] svg, [lang="flow"] svg { max-width: 100%; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+
+
+.CodeMirror { height: auto; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.CodeMirror-scroll { overflow-y: hidden; overflow-x: auto; z-index: 3; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background: inherit; white-space: nowrap; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: red; }
+.cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { height: 100%; outline: 0px; position: relative; box-sizing: content-box; background: inherit; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow: hidden; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow: hidden; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 30px; z-index: 3; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: none !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; word-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { word-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+
+
+:root { --control-text-color: #777; }
+h1, .h1, .f1 { font-size: 2rem; line-height: 2.5rem; }
+h2, .h2, .f2 { font-size: 1.5rem; line-height: 2rem; }
+h3, .h3, .f3 { font-size: 1.25rem; line-height: 1.5rem; }
+p, .p, .f4, h4, h5, h6, dl, ol, ul, pre[cid], div[cid], #typora-source { font-size: 1.125rem; line-height: 1.5rem; }
+h4 { font-size: 1.13rem; }
+body { font-family: Merriweather, "PT Serif", Georgia, "Times New Roman", STSong, serif; line-height: 1.5rem; font-weight: 400; }
+#write { max-width: 914px; color: rgb(51, 51, 51); }
+img { width: auto; max-width: 100%; }
+body { font-size: 1.5rem; box-sizing: border-box; }
+.ty-table-edit { background: rgb(237, 237, 237); }
+table { width: 100%; font-size: 1.125rem; }
+table > thead > tr > th, table > thead > tr > td, table > tbody > tr > th, table > tbody > tr > td, table > tfoot > tr > th, table > tfoot > tr > td { padding: 12px; line-height: 1.2; vertical-align: top; border-top: 1px solid rgb(51, 51, 51); }
+table > thead > tr > th { vertical-align: bottom; border-bottom: 2px solid rgb(51, 51, 51); }
+table > caption + thead > tr:first-child > th, table > caption + thead > tr:first-child > td, table > colgroup + thead > tr:first-child > th, table > colgroup + thead > tr:first-child > td, table > thead:first-child > tr:first-child > th, table > thead:first-child > tr:first-child > td { border-top: 0px; }
+table > tbody + tbody { border-top: 2px solid rgb(51, 51, 51); }
+p { font-weight: 300; line-height: 1.5; }
+abbr { border-bottom: 1px dotted black; cursor: help; }
+pre, code { font-family: Menlo, Monaco, "Courier New", monospace; }
+code, .md-fences { color: rgb(122, 122, 122); }
+.md-fences { padding: 0.5rem 1.125em; margin-bottom: 0.88em; font-size: 1rem; border: 1px solid rgb(122, 122, 122); }
+blockquote { padding: 1.33em; font-style: italic; border-left: 5px solid rgb(122, 122, 122); color: rgb(85, 85, 85); }
+blockquote em { color: rgb(0, 0, 0); }
+blockquote footer { font-size: 0.85rem; font-style: normal; background-color: rgb(255, 255, 255); color: rgb(122, 122, 122); border-color: transparent; }
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 { font-family: Lato, "Helvetica Neue", Helvetica, sans-serif; font-weight: bold; line-height: 1.2; margin: 1em 0px 0.5em; }
+@media screen and (min-width: 48em) {
+  .h1, h1 { font-size: 3.25rem; }
+  .h2, h2 { font-size: 2.298rem; }
+  .h3, h3 { font-size: 1.625rem; }
+  .h4, h4 { font-size: 1.3rem; }
+  #write > h4.md-focus::before, #write > h5.md-focus::before, #write > h6.md-focus::before { top: 1px; }
+  .p, p, li { font-size: 1.25rem; line-height: 1.8; }
+  table { font-size: 1.25rem; }
+}
+@media (max-width: 48em) {
+  blockquote { margin-left: 1rem; margin-right: 0px; padding: 0.5em; }
+  .h1, h1 { font-size: 2.827rem; }
+  .h2, h2 { font-size: 1.999rem; }
+  .h3, h3 { font-size: 1.413rem; }
+  .h4, h4 { font-size: 1.3rem; }
+}
+@media screen and (min-width: 64em) {
+  .h1, h1 { font-size: 4.498rem; }
+  .h2, h2 { font-size: 2.29rem; }
+  .h3, h3 { font-size: 1.9rem; }
+  .h4, h4 { font-size: 1.591rem; }
+  #write > h4.md-focus::before { top: 4px; }
+}
+a { color: rgb(70, 63, 92); text-decoration: underline; }
+#write { padding-top: 2rem; }
+#write pre.md-meta-block { min-height: 35px; padding: 2000px 1em 10px 0px; white-space: pre; border-width: 0px 30px; border-top-style: initial; border-bottom-style: initial; border-top-color: initial; border-bottom-color: initial; border-image: initial; border-left-style: solid; border-left-color: rgb(248, 248, 248); border-right-style: solid; border-right-color: rgb(248, 248, 248); width: 100vw; max-width: calc(100% + 60px); margin-left: -30px; margin-bottom: 2em; margin-top: -2010px; line-height: 1.5em; color: rgb(122, 122, 122); background-color: rgb(250, 250, 250); font-family: Lato, "Helvetica Neue", Helvetica, sans-serif; font-weight: 300; clear: both; font-size: 1.125rem; }
+.md-image > .md-meta { color: rgb(70, 63, 92); }
+.footnotes { font-size: 1.1rem; }
+.md-tag { font-family: Lato, "Helvetica Neue", Helvetica, sans-serif; }
+.code-tooltip { background: white; }
+.code-tooltip-content { font-size: 1.1rem; }
+.task-list { padding-left: 0px; }
+.md-task-list-item { padding-left: 34px; }
+.md-task-list-item > input { width: 1.25rem; height: 1.25rem; display: block; -webkit-appearance: initial; top: -0.5rem; margin-left: -1.6em; margin-top: calc(1rem - 7px); border: none; }
+.md-task-list-item > input:focus { outline: none; box-shadow: none; }
+.md-task-list-item > input::before { border: 1px solid rgb(85, 85, 85); border-radius: 1.5rem; width: 1.5rem; height: 1.5rem; background: rgb(255, 255, 255); content: " "; transition: background-color 200ms ease-in-out; display: block; }
+.md-task-list-item > input:checked::before, .md-task-list-item > input[checked]::before { background: rgb(51, 51, 51); border-width: 2px; display: inline-block; transition: background-color 200ms ease-in-out; }
+.md-task-list-item > input:checked::after, .md-task-list-item > input[checked]::after { opacity: 1; }
+.md-task-list-item > input::after { transition: opacity 0.05s ease-in-out; transform: rotate(-45deg); position: absolute; top: 0.4375rem; left: 0.28125rem; width: 0.9375rem; height: 0.5rem; border-width: 0px 0px 3px 3px; border-bottom-style: solid; border-left-style: solid; border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); border-image: initial; border-top-style: initial; border-top-color: initial; border-right-style: initial; border-right-color: initial; content: " "; opacity: 0; }
+.md-tag { color: inherit; }
+.md-toc:focus .md-toc-content { margin-top: 19px; }
+#typora-sidebar { font-size: 1rem !important; }
+.html-for-mac #typora-sidebar { background-color: white; }
+.outline-content li, .outline-content ul { font-size: 1rem !important; }
+.outline-title { line-height: inherit; margin-top: 10px; }
+.outline-expander { width: 18px; }
+.outline-expander::before { content: "+"; font-family: inherit; color: rgb(108, 108, 108); font-size: 1.5rem; top: 0.1rem; }
+.outline-expander:hover::before { content: "+"; }
+.outline-item-open > .outline-item > .outline-expander::before { content: "-"; }
+#typora-source { font-family: Courier, monospace; color: rgb(106, 106, 106); }
+.os-windows #typora-source { font-family: inherit; }
+.cm-s-typora-default .cm-header, .cm-s-typora-default .cm-property, .CodeMirror.cm-s-typora-default div.CodeMirror-cursor { color: rgb(66, 139, 202); }
+.cm-s-typora-default .cm-atom, .cm-s-typora-default .cm-number { color: rgb(119, 119, 119); }
+.preference-item-hint { margin-top: 16px; }
+.md-diagram-panel { margin-top: 24px; margin-left: -1.2em; }
+.md-mathjax-midline { background: rgb(250, 250, 250); }
+.enable-diagrams pre.md-fences[lang="sequence"] .code-tooltip, .enable-diagrams pre.md-fences[lang="flow"] .code-tooltip, .enable-diagrams pre.md-fences[lang="mermaid"] .code-tooltip { bottom: -3.4em; }
+.dropdown-menu .divider { border-color: rgb(229, 229, 229); }
+
+
+
+
+
+ .typora-export li, .typora-export p, .typora-export,  .footnote-line {white-space: normal;} 
+</style>
+</head>
+<body class='typora-export' >
+<div  id='write'  class = 'is-node'><h1><a name='header-n0' class='md-header-anchor '></a>Openflow </h1><p>&nbsp;</p><p>&nbsp;</p><p>version: 1.0.1</p><p>&nbsp;</p><hr /><blockquote><p>KNET Solutions (Online Training Centre),</p><p><a href='http://knetsolutions.in' target='_blank' class='url'>http://knetsolutions.in</a>                    <span>		</span>   </p><p><a href='mailto:knetsolutions2@gmail.com' target='_blank' class='url'>knetsolutions2@gmail.com</a></p><p>Phone/WhatsApp: +919445042007</p><p>we provide Academic SDN Project assistance/guidance. </p></blockquote><p>&nbsp;</p><p>&nbsp;</p><hr /><div class='md-toc' mdtype='toc'><p class="md-toc-content"><span class="md-toc-item md-toc-h1" data-ref="n0"><a class="md-toc-inner" href="#header-n0">Openflow </a></span><span class="md-toc-item md-toc-h2" data-ref="n26"><a class="md-toc-inner" href="#header-n26">1. Introduction</a></span><span class="md-toc-item md-toc-h2" data-ref="n36"><a class="md-toc-inner" href="#header-n36">2. Switch Components</a></span><span class="md-toc-item md-toc-h2" data-ref="n69"><a class="md-toc-inner" href="#header-n69">3.  Openflow channel</a></span><span class="md-toc-item md-toc-h2" data-ref="n81"><a class="md-toc-inner" href="#header-n81">4. Openflow Flow table:</a></span><span class="md-toc-item md-toc-h3" data-ref="n103"><a class="md-toc-inner" href="#header-n103">Openflow Matching:</a></span><span class="md-toc-item md-toc-h3" data-ref="n107"><a class="md-toc-inner" href="#header-n107">Match Fields:</a></span><span class="md-toc-item md-toc-h3" data-ref="n124"><a class="md-toc-inner" href="#header-n124">Instructions:</a></span><span class="md-toc-item md-toc-h4" data-ref="n151"><a class="md-toc-inner" href="#header-n151">Action Set and Actions:</a></span><span class="md-toc-item md-toc-h3" data-ref="n171"><a class="md-toc-inner" href="#header-n171">Flow Removal</a></span><span class="md-toc-item md-toc-h3" data-ref="n180"><a class="md-toc-inner" href="#header-n180">Counters</a></span><span class="md-toc-item md-toc-h2" data-ref="n200"><a class="md-toc-inner" href="#header-n200">5.&nbsp;Openflow Messages:</a></span><span class="md-toc-item md-toc-h3" data-ref="n241"><a class="md-toc-inner" href="#header-n241">Message transcation - during the Topology Setup</a></span><span class="md-toc-item md-toc-h3" data-ref="n260"><a class="md-toc-inner" href="#header-n260">Hello Message:</a></span><span class="md-toc-item md-toc-h3" data-ref="n272"><a class="md-toc-inner" href="#header-n272">Echo Message: </a></span><span class="md-toc-item md-toc-h3" data-ref="n277"><a class="md-toc-inner" href="#header-n277">Features Request/Reply: </a></span><span class="md-toc-item md-toc-h3" data-ref="n286"><a class="md-toc-inner" href="#header-n286">Packet-in:</a></span><span class="md-toc-item md-toc-h3" data-ref="n289"><a class="md-toc-inner" href="#header-n289">Packet-out Message: </a></span><span class="md-toc-item md-toc-h3" data-ref="n292"><a class="md-toc-inner" href="#header-n292">Modify Flow Entry Message:</a></span><span class="md-toc-item md-toc-h2" data-ref="n303"><a class="md-toc-inner" href="#header-n303">6. Important Take aways:</a></span><span class="md-toc-item md-toc-h2" data-ref="n310"><a class="md-toc-inner" href="#header-n310">7. Openflow Ports:</a></span><span class="md-toc-item md-toc-h3" data-ref="n311"><a class="md-toc-inner" href="#header-n311">Physical ports:</a></span><span class="md-toc-item md-toc-h3" data-ref="n314"><a class="md-toc-inner" href="#header-n314">Logical ports:</a></span><span class="md-toc-item md-toc-h3" data-ref="n317"><a class="md-toc-inner" href="#header-n317">Reserved ports:</a></span><span class="md-toc-item md-toc-h2" data-ref="n321"><a class="md-toc-inner" href="#header-n321">8. References</a></span></p></div><hr /><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>This document text is copied from the Openflow 1.3 specifications</p><p><a href='https://www.opennetworking.org/software-defined-standards/specifications/' target='_blank' class='url'>https://www.opennetworking.org/software-defined-standards/specifications/</a></p><p>&nbsp;</p><h2><a name='header-n26' class='md-header-anchor '></a>1. Introduction</h2><p>The OPENFLOW specification covers the components and the basic functions of the switch, and the OpenFlow switch protocol to manage an OpenFlow switch from a remote OpenFlow controller.</p><p>Openflow Version Details:</p><p>Openflow 1.1</p><p>Openflow 1.2</p><p>Openflow 1.3</p><p>Openflow 1.4</p><p>Openflow 1.5</p><p>Most widley supported: 1.3</p><p>&nbsp;</p><h2><a name='header-n36' class='md-header-anchor '></a>2. Switch Components</h2><p>An OpenFlow Logical Switch consists of one or more flow tables and a group table, which perform packet lookups and forwarding, and one or more OpenFlow channels to an external controller (Figure 1). </p><p><img src='imgs/openflow-components.png?raw=true' alt='Alt text' referrerPolicy='no-referrer' /></p><ul><li>The switch communicates with the controller and the controller manages the switch via the OpenFlow switch protocol.</li></ul><ul><li>Using the OpenFlow switch protocol, the controller can add, update, and delete flow entries in flow tables, both reactively (in response to packets) and proactively. </li></ul><ul><li>Each flow table in the switch contains a set of flow entries; each flow entry consists of match fields, counters, and a set of instructions to apply to matching packets.</li></ul><ul><li>Matching starts at the first flow table and may continue to additional flow tables of the pipeline</li><li>Flow entries match packets in priority order, with the first matching entry in each table being used. </li><li>If a matching entry is found, the instructions associated with the specific flow entry are executed. </li><li>If no match is found in a flow table, the outcome depends on configuration of the table-miss flow entry: for example, the packet may be forwarded to the controllers over the OpenFlow channel, dropped, or may continue to the next flow table</li></ul><ul><li>Actions included in instructions describe packet forwarding, packet modification and group table processing. </li><li>Flow entries may forward to a port. This is usually a physical port, but it may also be a logical port defined by the switch(such as link aggregation groups, tunnels or loopback interfaces) or a reserved port defined by this specification. </li></ul><p>&nbsp;</p><h2><a name='header-n69' class='md-header-anchor '></a>3.  Openflow channel</h2><ul><li>The OpenFlow channel is the interface that connects each OpenFlow Logical Switch to an OpenFlow controller. Through this interface, the controller configures and manages the switch, receives events from the switch, and sends packets out the switch. </li><li>The Control Channel of the switch may support a single OpenFlow channel with a single controller, or multiple OpenFlow channels enabling multiple controllers.</li><li>The OpenFlow channel is usually encrypted using TLS, but may be run directly over TCP</li><li>Default Port number : 6653</li></ul><p>&nbsp;</p><h2><a name='header-n81' class='md-header-anchor '></a>4. Openflow Flow table:</h2><p>A flow table entry is identified by its match fields and priority: the match fields and priority taken  together identify a unique flow entry in a specific flow table. </p><p>A flow table consists of flow entries.</p><p><img src='imgs/of_flowtable.jpg?raw=true' alt='Alt text' referrerPolicy='no-referrer' /></p><p><strong>Example Flows with MAC Match</strong></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang=""><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> cookie=0x0, duration=4.742s, table=0, n_packets=2, n_bytes=196, priority=1,in_port="s1-eth2",dl_src=00:00:00:00:11:12,dl_dst=00:00:00:00:11:11 actions=output:"s1-eth1"</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> cookie=0x0, duration=4.738s, table=0, n_packets=1, n_bytes=98, priority=1,in_port="s1-eth1",dl_src=00:00:00:00:11:11,dl_dst=00:00:00:00:11:12 actions=output:"s1-eth2"</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> cookie=0x0, duration=5.781s, table=0, n_packets=29, n_bytes=3102, priority=0 actions=CONTROLLER:65535</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 189px;"></div><div class="CodeMirror-gutters" style="display: none; height: 189px;"></div></div></div></pre><p><strong>Example Flows with IP Match</strong></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang=""><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> cookie=0x0, duration=12.927s, table=0, n_packets=2, n_bytes=196, priority=1,ip,nw_src=192.168.1.1,nw_dst=192.168.1.2 actions=output:"s1-eth2"</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> cookie=0x0, duration=12.918s, table=0, n_packets=2, n_bytes=196, priority=1,ip,nw_src=192.168.1.2,nw_dst=192.168.1.1 actions=output:"s1-eth1"</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> cookie=0x0, duration=12.959s, table=0, n_packets=37, n_bytes=3844, priority=0 actions=CONTROLLER:65535</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 126px;"></div><div class="CodeMirror-gutters" style="display: none; height: 126px;"></div></div></div></pre><p><strong>Example Flows with TCP/UDP Ports Match</strong></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang=""><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">suresh@suresh-vm:~$ sudo ovs-ofctl -O OpenFlow13 dump-flows s1</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> cookie=0x0, duration=3.933s, table=0, n_packets=238752, n_bytes=11069190464, priority=1,tcp,nw_src=192.168.1.2,nw_dst=192.168.1.1,tp_src=37304,tp_dst=5001 actions=output:"s1-eth1"</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> cookie=0x0, duration=3.906s, table=0, n_packets=192421, n_bytes=12699810, priority=1,tcp,nw_src=192.168.1.1,nw_dst=192.168.1.2,tp_src=5001,tp_dst=37304 actions=output:"s1-eth2"</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> cookie=0x0, duration=31.495s, table=0, n_packets=43, n_bytes=4309, priority=0 actions=CONTROLLER:65535</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">suresh@suresh-vm:~$ </span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 210px;"></div><div class="CodeMirror-gutters" style="display: none; height: 210px;"></div></div></div></pre><p>&nbsp;</p><p><strong>match fields:</strong> to match against packets. These consist of the ingress port and packet headers, and optionally other pipeline fields such as metadata specified by a previous table</p><p><strong>priority:</strong> matching precedence of the flow entry.</p><p><strong>counters:</strong> updated when packets are matched.</p><p><strong>instructions:</strong> to modify the action set or pipeline processing.</p><p><strong>timeouts:</strong> maximum amount of time or idle time before flow is expired by the switch.</p><p><strong>cookie:</strong> opaque data value chosen by the controller. May be used by the controller to filter flow entries affected by flow statistics, flow modification and flow deletion requests. Not used when processing packets.</p><p><strong>flags:</strong> flags alter the way flow entries are managed, for example the flag OFPFF_SEND_FLOW_REM triggers flow removed messages for that flow entry.</p><p>The flow entry that wildcards all match fields (all fields omitted) and has priority equal to 0 is called the table-miss flow entry.</p><p>The table-miss flow entry must support at least sending packets to the controller using the CONTROLLER reserved port.</p><h3><a name='header-n103' class='md-header-anchor '></a>Openflow Matching:</h3><p>On receipt of a packet, an OpenFlow Switch performs the functions shown as below. </p><p><img src='imgs/of_match.jpg?raw=true' alt='Alt text' referrerPolicy='no-referrer' /></p><p>The switch starts by performing a table lookup in the first flow table, and based on pipeline processing, may perform table lookups in other flow tables</p><h3><a name='header-n107' class='md-header-anchor '></a>Match Fields:</h3><p><strong>Reference : Page 62 of the specification</strong></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">Switch input port. */</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">Switch physical input port. *</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">Ethernet destination address. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">Ethernet source address. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">Ethernet frame type. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">VLAN id. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">VLAN priority. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">IP DSCP (6 bits in ToS field). */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">IP ECN (2 bits in ToS field). */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">IP protocol. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">IPv4 source address. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">IPv4 destination address. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">TCP source port. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">TCP destination port. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">UDP source port. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">UDP destination port. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">SCTP source port. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">SCTP destination port. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">ICMP type. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">ICMP code. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">ARP opcode. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">ARP source IPv4 address. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">ARP target IPv4 address. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">ARP source hardware address. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">ARP target hardware address. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">IPv6 source address. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">IPv6 destination address. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">IPv6 Flow Label */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">ICMPv6 type. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">ICMPv6 code. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">Target address for ND.</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">Source link-layer for ND. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">Target link-layer for ND. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">MPLS label. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">MPLS TC. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">MPLS BoS bit. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">PBB I-SID. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">Logical Port Metadata. */</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">IPv6 Extension Header pseudo-field */</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 819px;"></div><div class="CodeMirror-gutters" style="display: none; height: 819px;"></div></div></div></pre><ul><li>Match fields come in two types, header match fields and pipeline match fields.</li><li>Header match fields are match fields matching values extracted from the packet headers. Most header match fields map directly to a specific field in the packet header defined by a datapath protocol</li><li>All header match fields have different size, prerequisites and masking capability</li><li>Pipeline match fields are match fields matching values attached to the packet for pipeline processing and not associated with packet headers, such as META_DATA, TUNNEL_ID. Refer : Page 66.</li></ul><p><strong>Prerequisties Example:</strong></p><p>If you want to include the SRC IP Address in the match, Prerequisties is ETH_TYPE should be 0X0800. It means, you need to include the ETH_TYPE match also.</p><p><strong>Masking example:</strong></p><p>You can match the Source IP against with Subnet. Refer page 64 for detailed table.</p><h3><a name='header-n124' class='md-header-anchor '></a>Instructions:</h3><p>Each flow entry contains a set of instructions that are executed when a packet matches the entry. These instructions result in changes to the packet, action set and/or pipeline processing.</p><p><strong>Apply-Actions action(s): </strong></p><ul><li>Applies the specific action(s) immediately, without any change to the Action Set. </li><li>This instruction may be used to modify the packet between two tables or to execute multiple actions of the same type. </li><li>The actions are specified as a list of actions</li></ul><p><strong>Clear-Actions:</strong></p><ul><li>Clears all the actions in the action set immediately.</li></ul><p><strong>Goto-Table next-table-id:</strong></p><ul><li>Indicates the next table in the processing pipeline. The table-id must be greater than the current table-id.</li></ul><p><strong>Write-Actions action(s):</strong></p><ul><li>Merges the specified set of action(s) into the current action set</li></ul><p><strong>Meter meter id:</strong></p><ul><li>Direct packet to the specified meter.</li></ul><h4><a name='header-n151' class='md-header-anchor '></a>Action Set and Actions:</h4><p>Action set  contains set of actions. </p><p>Example actions are:</p><ul><li>Output port no</li><li>Group group id</li><li>Drop</li><li>Set-Queue queue id</li><li>Push-Tag/Pop-Tag ethertype (VLAN, MPLS, PBP)</li><li>Set-Field field type value</li><li>Change-TTL (IP TTL, MPLS TTL)</li></ul><p>&nbsp;</p><h3><a name='header-n171' class='md-header-anchor '></a>Flow Removal</h3><p>Flow entries are removed from flow tables in two ways, either at the request of the controller or via the switch flow expiry mechanism.</p><p><strong>Flow expiry:</strong></p><p>Each flow entry has an idle_timeout and a hard_timeout associated with it</p><p>Example:</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang=""><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> cookie=0x0, duration=7.619s, table=0, n_packets=3, n_bytes=238, idle_timeout=10, hard_timeout=30, priority=1,in_port="s1-eth2",dl_src=00:00:00:00:11:12,dl_dst=00:00:00:00:11:11 actions=output:"s1-eth1"</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> cookie=0x0, duration=7.605s, table=0, n_packets=2, n_bytes=140, idle_timeout=10, hard_timeout=30, priority=1,in_port="s1-eth1",dl_src=00:00:00:00:11:11,dl_dst=00:00:00:00:11:12 actions=output:"s1-eth2"</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> cookie=0x0, duration=8.652s, table=0, n_packets=33, n_bytes=3527, priority=0 actions=CONTROLLER:65535</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 168px;"></div><div class="CodeMirror-gutters" style="display: none; height: 168px;"></div></div></div></pre><p><strong>Hard_timeout</strong>
+If the hard_timeout field is non-zero, the switch must note the flow
+entry’s arrival time, as it may need to evict the entry later. A non-zero hard_timeout field causes the flow entry to be removed after the given number of seconds, regardless of how many packets it has matched.</p><p><strong>idle_timeout</strong>
+If the idle_timeout field is non-zero, the switch must note the arrival time of the last packet associated with the flow, as it may need to evict the entry later. A non-zero idle_timeout field causes the flow entry to be removed when it has matched no packets in the given number of seconds. The switch must implement flow expiry and remove flow entries from the flow table when one of their timeouts is exceeded.</p><p>&nbsp;</p><h3><a name='header-n180' class='md-header-anchor '></a>Counters</h3><p>statistics are maintained by the openflow switch as below,</p><ul><li>Per flow entry</li><li>Per flow table</li><li>Per Switch Port</li><li>Per Queue</li><li>Per Group</li><li>Per Group Bucket</li><li>Per Meter</li><li>Per Meter Band</li></ul><h2><a name='header-n200' class='md-header-anchor '></a>5. Openflow Messages:</h2><p>Three types of messages.</p><p><strong>1. Controller to Switch</strong></p><p>Controller-to-switch messages are initiated by the controller
+and used to directly manage or inspect the state of the switch</p><ul><li>Feature Request</li><li>Packet Out</li><li>Modify Flow Table</li><li>Modify Group Table</li><li>Modify Meter Table</li><li>OpenFlow Switch Description Request</li><li>OpenFlow Port Description Request</li><li>Openflow Statistics Request(Flow, Port, Flowtable, Aggregate, Group, Meter, Queue )</li><li>Role Request</li><li>Barrier Request</li></ul><p><strong>2. Asynchronous</strong></p><p>Asynchronous messages are initiated by the switch and used to update the controller about network events and changes to the switch state</p><ul><li>Packet In</li><li>Flow Removed</li></ul><p><strong>3. Symmetric</strong></p><p>Symmetric messages are initiated by either the switch or the controller and sent without solicitation.</p><ul><li>Hello Message</li><li>Echo Message</li></ul><p>&nbsp;</p><h3><a name='header-n241' class='md-header-anchor '></a>Message transcation - during the Topology Setup</h3><ol start='' ><li>Hello</li><li>Feature request/Response</li><li>Switch/Port Description Request/Response</li><li>Modify Flow Entry (To install table Miss entry)</li><li>Packet IN (Switch to Controller)</li><li>Packet Out (Controller to Switch)</li><li>Modify Flow Entry (Install a flow)</li><li>Echo</li></ol><h3><a name='header-n260' class='md-header-anchor '></a>Hello Message:</h3><p>Hello messages are exchanged between the switch and controller upon connection startup.</p><ul><li><p>Switch sends Openflow Hello Message(includes version number) to the Controller</p></li><li><p>Controller responds with the Hello Message if version is supported.</p></li><li><p>Failure Case(Version MisMatch): If different Openflow Version is user between the Controller and Switch, Hello Message will fail.</p></li><li><p>You will see similar error msg in the controller.</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang=""><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>Error:</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>unsupported version 0x1. If possible, set the switch to use one of the versions [3]</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 63px;"></div><div class="CodeMirror-gutters" style="display: none; height: 63px;"></div></div></div></pre></li></ul><h3><a name='header-n272' class='md-header-anchor '></a>Echo Message: </h3><p>Echo request/reply messages can be sent from either the switch or the controller, and must return an echo reply. They are mainly used to verify the liveness of a controller-switch connection, and may as well be used to measure its latency or bandwidth.(default: 5sec interval)</p><p> A. Switch sends Echo Request to the Controller.</p><p> B. Controller responds back with Echo Reply.</p><h3><a name='header-n277' class='md-header-anchor '></a>Features Request/Reply: </h3><ul><li>The controller may request the identity and the basic capabilities of a switch by sending a features request; </li><li>The switch must respond with a features reply that specifies the identity and basic capabilities(datapath ID, buffers, number of tables, statistics) of the switch. </li><li>This is commonly performed upon establishment of the OpenFlow channel.</li></ul><p>&nbsp;</p><h3><a name='header-n286' class='md-header-anchor '></a>Packet-in:</h3><p>Transfer the control of a packet to the controller. For all packets forwarded to the CONTROLLER reserved port using a flow entry or the table-miss flow entry, a packet-in event is always sent to controllers</p><p>&nbsp;</p><h3><a name='header-n289' class='md-header-anchor '></a>Packet-out Message: </h3><p>These are used by the controller to send packets out of a specified port on the switch, and to forward packets received via Packet-in messages. Packet-out messages must contain a full packet or a buffer ID referencing a packet stored in the switch. </p><p>The message must also contain a list of actions to be applied in the order they are specified; an empty list of actions drops the packet.</p><h3><a name='header-n292' class='md-header-anchor '></a>Modify Flow Entry Message:</h3><p>Modifications to a flow table from the controller are done with the OFPT_FLOW_MOD message:</p><ul><li>To add, remove, modify the flow in the switch, controller using this message.</li><li>Controller Sends the Flow Modification message to the switch with this important params (Command, Match, Instruction, action.)</li><li>Command:  ADD, MODIFY, MODIFY_STRICT, DELETE, DELETE_STRICT</li></ul><p>&nbsp;</p><h2><a name='header-n303' class='md-header-anchor '></a>6. Important Take aways:</h2><p>1) Openflow version should match between the switch and Controller</p><p>2) Our Controller Application(our RYU project/exercise) should process Packet IN (Message), to build the Switching/Routing logic.</p><p>3) Our Controller Application(our RYU project/exercise) should use Flow Modifcation message to add/modify/delete the flows in the switch.</p><p>4) Our Controller Application(our RYU project/exercise) should use Flow Stats, Port Stats request message to get the statistics(Packets Sent/Received , etc) of the flows, Ports .</p><p>&nbsp;</p><h2><a name='header-n310' class='md-header-anchor '></a>7. Openflow Ports:</h2><h3><a name='header-n311' class='md-header-anchor '></a>Physical ports:</h3><p>The OpenFlow physical ports are switch defined ports that correspond to a hardware interface of the switch. In the Virtualized environment it represents the virutal interface.</p><p>Example:  &quot;s1-eth1&quot;</p><h3><a name='header-n314' class='md-header-anchor '></a>Logical ports:</h3><p>Logical ports are higher level abstractions that may be defined in the switch
+using non-OpenFlow methods (e.g. link aggregation groups, tunnels, loopback interfaces).</p><p>Example: &quot;vxlan0&quot;</p><h3><a name='header-n317' class='md-header-anchor '></a>Reserved ports:</h3><p>The OpenFlow reserved ports are defined by this specification. They specify generic forwarding actions such as sending to the controller, flooding, or forwarding using non-OpenFlow methods, such as “normal” switch processing.
+FLOOD, ALL, CONTROLLER, IN PORT, LOCAL, NORMAL, </p><p>Example: FLOOD
+<span>	</span></p><h2><a name='header-n321' class='md-header-anchor '></a>8. References</h2><p><a href='https://www.opennetworking.org/software-defined-standards/specifications/' target='_blank' class='url'>https://www.opennetworking.org/software-defined-standards/specifications/</a></p><p><a href='https://osrg.github.io/ryu/resources.html' target='_blank' class='url'>https://osrg.github.io/ryu/resources.html</a></p><p><a href='https://overlaid.net/2017/02/15/openflow-basic-concepts-and-theory/' target='_blank' class='url'>https://overlaid.net/2017/02/15/openflow-basic-concepts-and-theory/</a></p><p>&nbsp;</p></div>
+</body>
+</html>
